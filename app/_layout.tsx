@@ -1,19 +1,20 @@
 // import "react-native-reanimated";
-import * as SplashScreen from "expo-splash-screen";
 import "@/global.css";
-import Hello from "./navigation/Hello";
-import { useEffect, useState } from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import {NavigationContainer} from '@react-navigation/native'
-import Auth_nav from "@/app/navigation/Auth_nav";
+import { useFonts } from "expo-font";
+import { Slot } from "expo-router";
+import { useEffect } from "react";
+import { SafeAreaView } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
   });
-  console.log("RootLayout loaded twice")
+  console.log("RootLayout loaded twice");
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
@@ -32,9 +33,9 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView>
-      <NavigationContainer>
-        <Auth_nav/>
-      </NavigationContainer>
+      <SafeAreaView style={{ flex: 1 }}>
+        <Slot />
+      </SafeAreaView>
     </GestureHandlerRootView>
   );
 }
